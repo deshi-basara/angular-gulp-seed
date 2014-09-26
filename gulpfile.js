@@ -181,7 +181,9 @@ gulp.task('serve', ['styles'], function() {
 	gulp.watch(['app/styles/**/*.{scss,sass}'], ['styles', reload]);
 
 	// watch for changes in our angular js-files
-	gulp.watch(['app/scripts/**/*.js'], ['jshint', 'inject']);
+	$.watch(['app/scripts/**/*.js'], function() {
+		runSequence('inject', ['jshint']);
+	});
 
 	// watch for images changes
 	gulp.watch(['app/images/**/*'], reload);
