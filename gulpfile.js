@@ -73,7 +73,6 @@ gulp.task('styles', function() {
 			style: 'expanded',
 			precision: 10
 		}))
-		.on('error', console.error.bind(console))
 		.pipe($.autoprefixer({browsers: config.autoprefixerBrowsers}))
 		.pipe(gulp.dest('.tmp/styles'))
 		.pipe($.size({title: 'styles'}))
@@ -175,7 +174,7 @@ gulp.task('serve', ['styles'], function() {
 	gulp.watch('bower.json', ['bower', reload]);
 
 	// watch for changes in index.html and module-partials
-	gulp.watch(['app/index.html'], reload);
+	gulp.watch(['app/index.html','app/scripts/**/tpl/*.html'], reload);
 
 	// watch for changes in our sass/scss-files
 	gulp.watch(['app/styles/**/*.{scss,sass}'], ['styles', reload]);
