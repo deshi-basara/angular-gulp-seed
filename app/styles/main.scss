@@ -1,0 +1,14 @@
+@import "../../bower_components/bourbon/dist/bourbon.scss";
+@import "../../bower_components/neat/app/assets/stylesheets/_neat.scss";
+
+/**
+ * Partial imports
+ */
+@import "partials/globals";
+@import "partials/loader";
+@import "partials/header";
+
+/**
+ * View imports
+ */
+@import "views/home";
