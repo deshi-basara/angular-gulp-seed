@@ -3,7 +3,7 @@
 /**
  * Module includes
  */
-var gulp = require('gulp'); 
+var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var browserSync = require("browser-sync");
 var del = require('del');
@@ -55,10 +55,10 @@ gulp.task('bower', function() {
  */
 gulp.task('inject', function() {
 	//var target = gulp.src('app/index.html');
-	//var sources = 
+	//var sources =
 
 	return gulp.src('./app/index.html')
-		.pipe($.inject(gulp.src(['./app/scripts/**/*.js'], {read: false}), {relative: true}))
+		.pipe($.inject(gulp.src(['./app/scripts/**/**/*.js'], {read: false}), {relative: true}))
 		.pipe(gulp.dest('app'))
 		.pipe($.size({title: 'inject'}));
 });
@@ -73,6 +73,9 @@ gulp.task('styles', function() {
 			style: 'expanded',
 			precision: 10
 		}))
+		.on('error', function(err) {
+			console.log(err.message);
+		})
 		.pipe($.autoprefixer({browsers: config.autoprefixerBrowsers}))
 		.pipe(gulp.dest('.tmp/styles'))
 		.pipe($.size({title: 'styles'}))
@@ -83,7 +86,7 @@ gulp.task('styles', function() {
  */
 gulp.task('jshint', function() {
 
-	return gulp.src('app/scripts/**/*.js')
+	return gulp.src('app/scripts/**/**/*.js')
 		.pipe(reload({stream: true, once: true})) // after a file is written, reload the js
 		.pipe($.jshint())
 		.pipe($.jshint.reporter('jshint-stylish'))
@@ -153,7 +156,7 @@ gulp.task('copy', function () {
  * Remove the .tmp- and dist-folder
  */
 gulp.task('clean', function() {
-	
+
 	del(['.tmp', '.sass-cache', 'dist'], function(err) {
 		if(err) return console.error(err);
 	});
@@ -174,13 +177,13 @@ gulp.task('serve', ['styles'], function() {
 	gulp.watch('bower.json', ['bower', reload]);
 
 	// watch for changes in index.html and module-partials
-	gulp.watch(['app/index.html','app/scripts/**/tpl/*.html'], reload);
+	gulp.watch(['app/index.html','app/scripts/**/**/*.html'], reload);
 
 	// watch for changes in our sass/scss-files
 	gulp.watch(['app/styles/**/*.{scss,sass}'], ['styles', reload]);
 
 	// watch for changes in our angular js-files
-	$.watch(['app/scripts/**/*.js'], function() {
+	$.watch(['app/scripts/**/**/*.js'], function() {
 		runSequence('inject', ['jshint']);
 	});
 

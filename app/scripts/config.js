@@ -1,12 +1,8 @@
-"use strict";
+'use strict';
 
- angular.module("config", [])
+angular.module('config', [])
 
-.constant("DEV", {
-	"name": "development",
-	"apiEndpoint": "http://dev.yoursite.com:10000/"
-})
-
-.constant('PATH', {
-	'directives': 'scripts/directives'
+.constant('config', {
+	'name': 'development',
+	'apiUrl': 'http://dev.yoursite.com:10000/'
 });

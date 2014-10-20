@@ -1,21 +1,14 @@
 /**
  * Colors
  */
-$color-white: #FFFFFF;
-$color-dark: #757475;
-$color-darker: #333333;
-$color-darkest: #262626;
-$color-black: #111;
+$glf-green: #5ACA00;
+$glf-greener: #50B200;
+$glf-red: #DD0039;
+$glf-white: #FFFFFF;
+$glf-grey: #E6E6E6;
+$glf-dark: #434343;
+$glf-border: #cdcdcd;
 
-$color-success: #70B85D;
-$color-temper: #0D8C7F;
-$color-error: #C8385A;
-
-$angular-red: #D42929;
-$angular-white: #FFFFFF;
-$angular-grey: #B2B2B2;
-$angular-blue: #176DEE;
-$angular-green: #009756;
 
 /**
  * Fonts
@@ -25,42 +18,19 @@ $font-primary: 'Lato', sans-serif;
 /**
  * Global settings
  */
-html {
+html, body {
 	width: 100%;
 	height: 100%;
-}
-
-body {
-	width: 100%;
-	min-height: 100%;
 
 	font-family: $font-primary;
 	font-weight: 300;
 }
 
-.container {
-	position: fixed;
-	//padding-top: 80px; // header height
-
+.main-container {
 	height: 100%;
 	width: 100%;
 }
 
-/**
- * Sections
- */
-.section {
-	position: absolute;
-	display: table;
-
-	@include size(100% 100%);
-}
-
-.section-content {
-	display: table-cell;
-	vertical-align: middle;
-
-	@include size(100% 100%);
-
-	text-align: center;
+.nested-container {
+    padding: 30px;
 }

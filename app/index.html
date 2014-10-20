@@ -16,9 +16,11 @@
             Vendor stylesheets
         -->
         <!-- build:css styles/vendor.min.css -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <!-- bower:css -->
-        <link rel="stylesheet" href="../bower_components/normalize-css/normalize.css" />
         <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="../bower_components/normalize.css/normalize.css" />
+        <link rel="stylesheet" href="../bower_components/ng-table/ng-table.css" />
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -33,30 +35,15 @@
     </head>
     <body ng-app="app">
 
-        <header id="header">
-            <h1>Angular-Gulp-Seed</h1>
-            <nav class="header-download">
-                Download:
-                <a href="" class="download-git">
-                    Github <i class="fa fa-github fa-2x"></i>
-                </a>
-                <a href="" class="visit-git">
-                    <i class="fa fa-angle-double-right"></i> Visit Github
-                </a>
-            </nav>
-        </header>
+        <!--
+            Custom loader directive
+        -->
+        <div ags-loaders></div>
 
-        <div class="container">
-            <!--
-                Custom loader directive 
-            -->
-            <div ags-loaders></div>
-
-            <!--
-                The ui-view directive tells $state where to place the templates
-            -->
-            <div ui-view></div>     
-        </div>
+        <!--
+            The ui-view directive tells $state where to place the templates
+        -->
+        <div ui-view class="main-container"></div>
 
         <!--
             Vendor scripts
@@ -65,18 +52,31 @@
         <!-- bower:js -->
         <script src="../bower_components/angular/angular.js"></script>
         <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="../bower_components/traceur/traceur.js"></script>
+        <script src="../bower_components/es6-module-loader/dist/es6-module-loader-sans-promises.js"></script>
+        <script src="../bower_components/system.js/dist/system.js"></script>
+        <script src="../bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+        <script src="../bower_components/angular-animate/angular-animate.js"></script>
+        <script src="../bower_components/ng-table/ng-table.js"></script>
+        <script src="../bower_components/ng-file-upload/angular-file-upload.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
         <!--
-            Custom angular scripts 
+            Custom angular scripts
         -->
         <!-- build:js scripts/main.min.js -->
         <!-- inject:js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/config.js"></script>
         <script src="scripts/directives/loader.js"></script>
-        <script src="scripts/home/home.controller.js"></script>
+        <script src="scripts/directives/progress/progress.directive.js"></script>
+        <script src="scripts/routes/dash/dash.controller.js"></script>
+        <script src="scripts/routes/job/job.controller.js"></script>
+        <script src="scripts/routes/job/job.service.js"></script>
+        <script src="scripts/routes/login/login.controller.js"></script>
+        <script src="scripts/routes/queue/queue.controller.js"></script>
+        <script src="scripts/services/auth/auth.service.js"></script>
         <!-- endinject -->
         <!-- endbuild -->
 

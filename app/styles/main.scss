@@ -5,10 +5,14 @@
  * Partial imports
  */
 @import "partials/globals";
+@import "partials/components";
+@import "partials/animation";
 @import "partials/loader";
-@import "partials/header";
 
 /**
  * View imports
  */
-@import "views/home";
+@import "views/login";
+@import "views/dash";
+@import "views/job";
+@import "views/queue";

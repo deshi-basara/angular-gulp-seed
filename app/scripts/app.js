@@ -5,12 +5,16 @@
 // the 2nd parameter is an array of 'requires'.
 angular
   .module('app', [
-  'ui.router', 
-  'config'
+  'ui.router',
+  'LocalStorageModule',
+  'ngAnimate',
+  'ngTable',
+  'angularFileUpload'
 ])
 
-.run(function() {
-
+.constant('config', {
+  'name': 'development',
+  'apiUrl': 'http://localhost:8080'
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -20,33 +24,55 @@ angular
   // Set up the various states which the app can be in.
   $stateProvider
 
-    .state('home', {
-      url: '/',
-      templateUrl: 'scripts/home/tpl/home.index.tpl.html'
+    .state('login', {
+      url: '/login',
+      templateUrl: 'scripts/routes/login/login.index.tpl.html',
+      controller: 'LoginCtrl',
+      controllerAs: 'ctrl'
     })
 
-    .state('search', {
-      url: '/search',
-      templateUrl: 'scripts/search/search.index.tpl.html',
-      controller: 'SearchCtrl'
+    .state('dash', {
+      url: '',
+      abstract: true,
+      templateUrl: 'scripts/routes/dash/dash.index.tpl.html',
+      controller: 'DashCtrl',
+      controllerAs: 'ctrl'
     })
 
-    .state('scanner', {
-      url: '/scanner',
-      templateUrl: 'scripts/scanner/scanner.index.tpl.html',
-      controller: 'ScannerCtrl',
-      controllerAs: 'scanner'
+    .state('dash.job', {
+      url: '/job',
+      controller: 'JobCtrl',
+      controllerAs: 'ctrl',
+      templateUrl: 'scripts/routes/job/job.index.tpl.html'
     })
 
-    .state('check', {
-      url: '/check/:qrData',
-      templateUrl: 'scripts/check/check.index.tpl.html',
-      controller: 'CheckCtrl',
-    });
-    
+    .state('dash.queue', {
+      url: '/queue',
+      controller: 'QueueCtrl',
+      controllerAs: 'ctrl',
+      templateUrl: 'scripts/routes/queue/queue.index.tpl.html'
+    })
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('queue');
 
-});
+})
 
+.run(function($state, AuthService) {
+
+  // check if the user has a active session
+  AuthService.hasSession()
+    .then(function(success) {
+      console.log(success);
+    }, function(error) {
+      alert(error);
+    });
+
+
+  var hasAuth = false;
+
+  if(hasAuth) {
+    console.log('rediec');
+    $state.go('login');
+  }
+})
