@@ -19,13 +19,13 @@
                         {{ file.name }}
                     </td>
                     <td data-title="'Fortschritt'">
-                        <ags-progress test="ctrl.test"></ags-progress>
+                        <ags-progress progress="{{ file.progress }}" status="{{ file.status }}"></ags-progress>
                     </td>
                     <td data-title="'Größe'">
-                        {{ file.size }}
+                        {{ file.size | agsBytes:2 }}
                     </td>
                     <td data-title="'Status'">
-                        Penis
+                        {{ file.status }}
                     </td>
                 </tr>
             </table>

@@ -6,12 +6,12 @@
         .module('app')
         .controller('JobCtrl', JobCtrl);
 
-    JobCtrl.$inject = ['ngTableParams', 'JobService'];
+    JobCtrl.$inject = ['ngTableParams', 'JobService', 'SweetAlert'];
 
     /**
      * Handles the dash-board view and all interactions
      */
-    function JobCtrl(ngTableParams, JobService) {
+    function JobCtrl(ngTableParams, JobService, SweetAlert) {
         var ctrl = this;
 
         /**
@@ -20,20 +20,22 @@
          * @return {[type]}         [description]
          */
         function onFileSelect($files) {
+            // inject
             ctrl.filesInUploadQueue = $files;
 
             // foreach file start an upload
-            for(var i = 0; i < $files.length; i++) {
-                var currentFile = $files[i];
+            for(var i = 0; i < ctrl.filesInUploadQueue.length; i++) {
+
+                // set the progress to zero and the status
+                ctrl.filesInUploadQueue[i].progress = parseInt(0);
+                ctrl.filesInUploadQueue[i].status = 'Uploading';
 
                 // upload the current file
-                JobService.uploadFile(currentFile).then(function(success) {
-                    console.log(success);
-                }, function(error) {
-                    console.log(error);
-                }, function(update) {
-                    ctrl.test = update;
-                    console.log(ctrl.test);
+                JobService.uploadFile(ctrl.filesInUploadQueue[i]).then(null, function(data, status) {
+                    // server not available
+                    if(status === null) {
+                        return SweetAlert.swal('Der Upload-Server ist nicht erreichbar');
+                    }
                 });
             }
         }
@@ -41,7 +43,6 @@
         //////////////////////
 
         angular.extend(ctrl, {
-            test: 0,
             filesInUploadQueue: [],
 
             onFileSelect: onFileSelect
