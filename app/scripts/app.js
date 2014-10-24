@@ -9,12 +9,13 @@ angular
   'LocalStorageModule',
   'ngAnimate',
   'ngTable',
-  'angularFileUpload'
+  'angularFileUpload',
+  'oitozero.ngSweetAlert'
 ])
 
 .constant('config', {
   'name': 'development',
-  'apiUrl': 'http://localhost:8080'
+  'apiUrl': 'http://localhost:1337'
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -51,6 +52,13 @@ angular
       controller: 'QueueCtrl',
       controllerAs: 'ctrl',
       templateUrl: 'scripts/routes/queue/queue.index.tpl.html'
+    })
+
+    .state('dash.profiles', {
+      url: '/profiles',
+      controller: 'ProfilesCtrl',
+      controllerAs: 'ctrl',
+      templateUrl: 'scripts/routes/profiles/profiles.index.tpl.html'
     })
 
   // if none of the above states are matched, use this as the fallback
