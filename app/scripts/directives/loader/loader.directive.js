@@ -8,7 +8,7 @@
 	function agsLoader() {
 		var directive = {
 			transclude: true,
-			templateUrl: 'scripts/directives/tpl/agsLoader.html',
+			templateUrl: 'scripts/directives/loader/loader.ags.tpl.html',
 			restrict: 'EA'
 		};
 		return directive;
